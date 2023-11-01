@@ -19,4 +19,4 @@ metadata:
 spec:
   parameters:
     internalCIDRs: []
-  enforcementAction: deny
+  # enforcementAction: deny
