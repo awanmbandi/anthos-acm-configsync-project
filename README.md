@@ -153,11 +153,11 @@ aws configure
 aws sts get-caller-identity
 ```
 
-### B) INSTALL AWS EKS `eksctl` On The `EKS-Setup-Env` VM Instance. The Commands Support `arm64`, `armv6` or `armv7`
+### B) Install AWS `eksctl` On The `EKS-Setup-Env` VM Instance. The Commands Support `arm64`, `armv6` or `armv7`
 #### The Installation Link
 - https://eksctl.io/installation/
 
-#### Installation Commands
+### Installation Commands
 ```bash
 ARCH=amd64
 PLATFORM=$(uname -s)_$ARCH
@@ -177,7 +177,7 @@ eksctl version
 #### Installing Kubernetes kubectl command line Link
 - https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html
 
-#### `kubectl` Installation Commands
+### `kubectl` Installation Commands
 ```bash
 curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.28.2/2023-10-17/bin/linux/amd64/kubectl
 
@@ -199,7 +199,7 @@ kubectl version --client
 ### D) Installation Google Cloud SDK for Linux
 - https://cloud.google.com/sdk/docs/install#linux
 
-#### Cloud SDK Installation and Configuration Steps (For Cloud Anthos)
+### Cloud SDK Installation and Configuration Steps (For Cloud Anthos)
 ```bash
 curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/PACKAGE_NAME
 
@@ -221,7 +221,7 @@ gcloud --version
 gcloud init
 ```
 
-#### Configure Your User and Application Auths and Set Project ID
+### Configure Your User and Application Auths and Set Project ID
 ```bash
 gcloud auth login
 gcloud config set project PROJECT_ID
@@ -246,7 +246,7 @@ This file is used to managed K8S Cluster User Authorization Definition
 aws eks --region CLUSTER_REGION update-kubeconfig --name CLUSTER_NAME
 ```
 
-#### Get the Nodes and Pods to confirm Cluster Access
+### Get the Nodes and Pods to confirm Cluster Access
 ```bash
 kubectl get nodes
 
@@ -256,7 +256,7 @@ kubectl get pods --all-namespaces
 ```
 
 ### 5) Configure/Complete EKS Cluster Membership Prequisites
-#### Setup The `OIDC` URL and `KUBE_CONFIG_CONTEXT` Context Variables
+### Setup The `OIDC` URL and `KUBE_CONFIG_CONTEXT` Context Variables
 ```bash
 # Create OIDC URL Variable
 OIDC_URL=$(aws eks describe-cluster --name <Cluster_Name> --region <Cluster_Region> --query "cluster.identity.oidc.issuer" --output text)
@@ -297,13 +297,13 @@ gcloud container hub memberships register eks-anthos-managed-cluster \
 ```
 ![CreateMembership](https://github.com/awanmbandi/realworld-microservice-projects/blob/zdocs/images/Screen%20Shot%202023-10-31%20at%203.40.55%20PM.png)
 
-#### Confirm That The Anthos Connect Agent Was Deployed Successfully And It's Running
+### Confirm That The Anthos Connect Agent Was Deployed Successfully And It's Running
 ```bash
 kubectl get ns
 kubectl get pods -n gke-connect
 ```
 
-#### Confirm That The EKS Cluster Membership Regration Was Successful
+### Confirm That The EKS Cluster Membership Regration Was Successful
 - Navigate back to Cloud Anthos 
 - Click on Clusters
 - You can as well verify this From the `GKE Service`
@@ -362,7 +362,7 @@ echo $BASE64_ENCODED_TOKEN
 - Check the box `Add a README file`
 - Click `Create Repository`
 
-#### Clone The Above Repository Locally, Download The Project Scripts and Push To Your GitHub Repo
+### Clone The Above Repository Locally, Download The Project Scripts and Push To Your GitHub Repo
 - Download the `Project ZIP/Code` From: https://github.com/awanmbandi/realworld-microservice-projects/tree/GCP
     - Unzip the Downloaded ZIP
     - Copy All the Folders/Directorys in the Following Path `realworld-microservice-projects/Anthos/anthos-gke-eks-aks-project`
@@ -465,7 +465,7 @@ kubectl get pods -n voting-webapp
 ![LoginToGKECluster](https://github.com/awanmbandi/realworld-microservice-projects/blob/zdocs/images/Screen%20Shot%202023-11-01%20at%202.20.46%20AM.png)
 
 ### 13) TEST THE SELF HEALING CAPABILITY OF ConfigSync with ACM
-#### Google GKE Cluster  (The Expectation Is Once You Delete It Should Reconcile The Configuration after `15` Seconds)
+### Google GKE Cluster  (The Expectation Is Once You Delete It Should Reconcile The Configuration after `15` Seconds)
 1) Update The Amount of Replicas of the application..
 **NOTE:** MAKE SURE TO UPDATE THIS THROUGH `GIT/GITHUB` NOT DIRECTLY 
 **NOTE:** SINCE CONFIG SYNC WILL `SYNCRONIZE THE CHANGES` AUTOMATICALLY
