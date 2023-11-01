@@ -2,13 +2,13 @@
 ![ProjectArch!](https://github.com/awanmbandi/realworld-microservice-projects/blob/zdocs/images/cloud_anthos_arch_project_v2.png)
 
 ### 1) Create A GKE Cluster on GCP
-#### A) Sign into your GCP Account
+### A) Sign into your GCP Account
 - Open a new Tab on your choice browser
 - Signup For a Free Google Cloud Account using the Following URL: https://cloud.google.com/free
 - Once you complete the Signup process, you would be logged into the Google Cloud Console as shown below
 ![ProjectArch!](https://github.com/awanmbandi/realworld-microservice-projects/blob/zdocs/images/Screen%20Shot%202023-11-01%20at%201.26.23%20PM.png)
 
-#### B) Enable The GKE Service API and Cloud Anthos APIs
+### B) Enable The GKE Service API and Cloud Anthos APIs
 1. Enable GKE Service API
 ![GKEService API1!](https://github.com/awanmbandi/realworld-microservice-projects/blob/zdocs/images/Screen%20Shot%202023-10-30%20at%204.11.29%20PM.png)
 ![GKEService API2!](https://github.com/awanmbandi/realworld-microservice-projects/blob/zdocs/images/Screen%20Shot%202023-10-30%20at%204.12.59%20PM.png)
@@ -19,7 +19,7 @@
 3. Navigate to The Anthos Dashboard
 ![AnthosService Dashboard!](https://github.com/awanmbandi/realworld-microservice-projects/blob/zdocs/images/Screen%20Shot%202023-10-30%20at%204.06.09%20PM.png)
 
-#### C) Create The GKE Cluster
+### C) Create The GKE Cluster
 - Navigate to the `GKE Service`
 - Click on `Create`
 ![GKEDashboard!](https://github.com/awanmbandi/realworld-microservice-projects/blob/zdocs/images/Screen%20Shot%202023-10-31%20at%201.09.45%20PM.png)
@@ -49,7 +49,7 @@
 
 
 ### 2) Create An EKS Cluster on AWS
-#### A) Create The Cluster
+### A) Create The Cluster
 - Navigate to `AWS EKS`
 - Click on `Add Cluster`
 ![EKSDashboard!](https://github.com/awanmbandi/realworld-microservice-projects/blob/zdocs/images/Screen%20Shot%202023-10-31%20at%201.43.36%20PM.png)
@@ -76,7 +76,7 @@
   - **NOTE:** *If you run into an error about resource availability within a specific zone, click on previous and delete the Zone Subnet Selection and then Create*
 ![EKSDashboard!](https://github.com/awanmbandi/realworld-microservice-projects/blob/zdocs/images/Screen%20Shot%202023-10-31%20at%202.03.16%20PM.png)
 
-#### B) Create EKS Cluster Node Group
+### B) Create EKS Cluster Node Group
 - Once the Cluster Creation is Complete and the `Status = Active`
 - Click on the Cluster name `eks-anthos-managed-cluster` (Confirm it's in an Active State)
 - Click on `Compute`
@@ -101,14 +101,14 @@
 ![EKSDashboard!](https://github.com/awanmbandi/realworld-microservice-projects/blob/zdocs/images/Screen%20Shot%202023-10-31%20at%202.30.09%20PM.png)
 
 ### 3) Create a Management Instance on AWS (For EKS Cluster Setup)
-#### 3.1) Create EC2 Instance 
+### 3.1) Create EC2 Instance 
 - Name: `EKS-Setup-Env`
 - AMI: `CentOs 7`
 - Instance type: `t2.micro`
 - Keypair: `Select or create one`
 - `Launch` Instance
 
-#### 3.2) Generate API Access Keys
+### 3.2) Generate API Access Keys
 - Navigate to `IAM`
 - Identify the `User` that you used to `create` the `EKS Cluster`
   - Could be a *`Normal User` or `Root User`*
@@ -228,7 +228,7 @@ gcloud config set project PROJECT_ID
 gcloud auth application-default login
 ```
 
-#### F) Enable The Following APIs on GCP For Anthos
+### F) Enable The Following APIs on GCP For Anthos
 ```bash
 gcloud services enable gkemulticloud.googleapis.com
 gcloud services enable gkeconnect.googleapis.com
@@ -285,7 +285,7 @@ gcloud auth list
 gcloud config configurations list
 ```
 
-#### B) Register The EKS Cluster To Anthos Hub
+### B) Register The EKS Cluster To Anthos Hub
 - Remove `PROVIDE_PROJECT_ID` and Provide your Anthos `Project ID`
 ```bash
 gcloud container hub memberships register eks-anthos-managed-cluster \
@@ -312,7 +312,7 @@ kubectl get pods -n gke-connect
 ### 8) Login To The Attached EKS Cluster (For Anthos To Manage)
 **NOTE:** *We Need To Authorize Anthos To The EKS Cluster Using K8S Service Accounts and Token*
 
-#### 8.1) Configure Authentication/Authorization From AWS EKS To Anthos with S.A Tokens
+### 8.1) Configure Authentication/Authorization From AWS EKS To Anthos with S.A Tokens
 ```bash
 kubectl create serviceaccount -n kube-system anthos-admin-sa
 
@@ -331,13 +331,13 @@ BASE64_ENCODED_TOKEN=$(kubectl get secret -n kube-system $SECRET_NAME -o jsonpat
 echo $BASE64_ENCODED_TOKEN
 ```
 
-#### 8.2) Decode above token and use it
+### 8.2) Decode above token and use it
 - Go to: https://www.base64decode.org/
     - Paste the Encoded Version 
     - Click on `DECODE`
     - Navigate to `Anthos LOGIN Page`
 
-#### 8.3) We Have To Now Authorize The EKS Cluster Access From Cloud Anthos (To Proide Access To Anthos)
+### 8.3) We Have To Now Authorize The EKS Cluster Access From Cloud Anthos (To Proide Access To Anthos)
 - Navigate tho the `Anthos Dashboard` or `Login Page`
     - Click on `Clusters`
     - Click on your cluster name `eks-anthos-managed-cluster`
@@ -379,7 +379,7 @@ echo $BASE64_ENCODED_TOKEN
 ![GitHubProjectRepo](https://github.com/awanmbandi/realworld-microservice-projects/blob/zdocs/images/Screen%20Shot%202023-10-31%20at%204.56.51%20PM.png)
 
 ### 10) Configure and Implement Anthos Config Management With Config Sync
-#### A) Install The ACM Config Sync Agent Accross Your Fleet (GKE and EKS Clusters)
+### A) Install The ACM Config Sync Agent Accross Your Fleet (GKE and EKS Clusters)
 - On the Anthos Dashboard
 - Under `Fleet Features`, Click on `Config` 
 ![ConfigureACM](https://github.com/awanmbandi/realworld-microservice-projects/blob/zdocs/images/Screen%20Shot%202023-10-31%20at%204.04.25%20PM.png)
@@ -391,7 +391,7 @@ echo $BASE64_ENCODED_TOKEN
   - Click on `Config` >>> `SETTINGS`
 ![ConfigureACM](https://github.com/awanmbandi/realworld-microservice-projects/blob/zdocs/images/Screen%20Shot%202023-10-31%20at%204.15.04%20PM.png)
 
-#### B) Create and Deploy A Microservice Application Package Across The Fleet
+### B) Create and Deploy A Microservice Application Package Across The Fleet
 - NOTE: This could also be a monitoring software you might want to deploy across your entire Anthos Environment to monitor Workloads
 - Use Case: It could be a Distributed Tracing Software to expose you the application Traces (Across All Environments)
 - Use Case: It Could be a Governance or Compliance Policy or Control which you might want to Enforce Accros All Cloud Workloads
@@ -411,7 +411,7 @@ echo $BASE64_ENCODED_TOKEN
     - DEPLOY PACKAGE
 ![DeployACMPackage](https://github.com/awanmbandi/realworld-microservice-projects/blob/zdocs/images/Screen%20Shot%202023-10-31%20at%205.34.19%20PM.png)
 
-#### C) Verify and Validate Package Was Deployed Successfully and The Cluster is In SYNC
+### C) Verify and Validate Package Was Deployed Successfully and The Cluster is In SYNC
 1. Confirm that the `voting-webapp` namespace was created across both the `GKE` and `EKS` Clusters
 ![DeployACMPackage](https://github.com/awanmbandi/realworld-microservice-projects/blob/zdocs/images/Screen%20Shot%202023-10-31%20at%205.37.28%20PM.png)
 
@@ -479,7 +479,7 @@ kubectl get pods -n voting-webapp
 4) Delete the `voting-webapp` Namespace 
 
 ### 14) IMPLEMENT A GOVERNANCE AND COMPLIANCE POLICY THAT PREVENTS INTERNET ACCESS IN THE `GKE` CLUSTER
-#### A) Install Anthos Policy Controller on Both Clusters
+### A) Install Anthos Policy Controller on Both Clusters
 - Navigate to `Anthos Dashboard`
 - Click on `Config` also known as `ACM`
 ![ACMPolicyController](https://github.com/awanmbandi/realworld-microservice-projects/blob/zdocs/images/Screen%20Shot%202023-11-01%20at%203.04.41%20AM.png)
@@ -496,7 +496,7 @@ kubectl get pods -n voting-webapp
 - AWS EKS Cluster
 ![ACMPolicyController](https://github.com/awanmbandi/realworld-microservice-projects/blob/zdocs/images/Screen%20Shot%202023-11-01%20at%203.17.06%20AM.png)
 
-#### B) Deploy The Policy Configuration To BLOCK INTERNET ACCESS To The `AWS` CLUSTER
+### B) Deploy The Policy Configuration To BLOCK INTERNET ACCESS To The `AWS` CLUSTER
 - Open the following Repository/Branch URL: https://github.com/awanmbandi/anthos-acm-configsync-project/tree/anthos-policies
 - COPY the Git URL
 - Navigate to `Anthos Dashboard`
