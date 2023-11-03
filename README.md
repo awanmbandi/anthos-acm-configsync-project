@@ -1,5 +1,5 @@
 # Multi-Cloud Implementation With Cloud Anthos
-![ProjectArch!](https://github.com/awanmbandi/realworld-microservice-projects/blob/zdocs/images/multi_cloud_with_anthos_arch.png)
+![ProjectArch!](https://github.com/awanmbandi/realworld-microservice-projects/blob/zdocs/images/multi_cloud_with_anthos_arch_v2.png)
 
 ### 1) Create A GKE Cluster on GCP
 ### A) Sign into your GCP Account
